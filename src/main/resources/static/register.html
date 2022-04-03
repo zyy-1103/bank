@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>注册</title>
+    <link rel="icon" href="img/icon.png">
+    <meta charset="utf-8">
+    <link href="../bootstrap-4.6.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/login.js"></script>
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="./css/signin.css" rel="stylesheet">
+    <link rel="shortcut icon" href="./images/logo.png">
+</head>
+<body class="text-center">
+
+<div class="container">
+
+    <form class="form-signin" action="#" method="post">
+
+        <a href="./index.html">
+            <img class="mb-4" src="./images/logo.png" alt="" style="width:30%;height: 30%">
+        </a>
+        <h1>REGISTER</h1><br>
+<!--        <h1 class="h3 mb-3 font-weight-normal">注册</h1>-->
+        <div style="text-align: left">
+            <span id="errorMsg" style="color: red"></span>
+        </div>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="text" id="inputUsername" class="form-control" placeholder="用户名" autofocus>
+
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="密码">
+        <label for="inputPassword2" class="sr-only">Password2</label>
+        <input type="password" id="inputPassword2" class="form-control" placeholder="确认密码">
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="邮箱">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1" onclick="getCode()">获取验证码</span>
+            </div>
+            <input type="text" id="emailCode" class="form-control" placeholder="验证码" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="button" onclick="register()">注册</button>
+    </form>
+</div>
+
+</body>
+</html>

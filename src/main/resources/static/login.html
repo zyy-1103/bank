@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>登录</title>
+
+    <link href="./bootstrap-4.6.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="./js/jquery.min.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script src="js/axios.min.js"></script>
+<!--    <script src="js/axios.min.map"></script>-->
+
+    <style>
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="./css/signin.css" rel="stylesheet">
+    <link rel="shortcut icon" href="./images/logo.png">
+</head>
+<body class="text-center">
+
+<div class="container" id="all">
+
+    <form class="form-signin" action="#" method="post">
+
+        <a href="./index.html">
+            <img class="mb-4" src="./images/logo.png" alt="" style="width:30%;height: 30%">
+        </a>
+        <h1>LOGIN</h1><br>
+
+
+        <!--        <h1 class="h3 mb-3 font-weight-normal">登录</h1>-->
+        <h1></h1>
+        <div style="text-align: left">
+            <span id="errorMsg" style="color: red">{{errorMsg}}</span>
+        </div>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input v-model="user"  type="text" id="inputUsername" class="form-control" placeholder="用户名" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input v-model="password" v-on:keydown.enter="login()" type="password" id="inputPassword" class="form-control" placeholder="密码" required>
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me" id="remember"> 记住密码
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" v-on:click="login()" type="button" >登录</button>
+    </form>
+
+    <div style="text-align: right">
+        <a href="./register.html">
+            <button type="button" class="btn btn-success">注册</button>
+        </a>
+    </div>
+</div>
+
+</body>
+<script src="js/login.js"></script>
+</html>
