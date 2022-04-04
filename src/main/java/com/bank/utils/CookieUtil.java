@@ -22,4 +22,13 @@ public class CookieUtil {
         }
         return null;
     }
+
+    public static Cookie getCookieByName(String name, Cookie[] cookies) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(name)) {
+                return cookie;
+            }
+        }
+        return null;
+    }
 }

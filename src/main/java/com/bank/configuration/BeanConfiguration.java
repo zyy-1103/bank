@@ -4,7 +4,6 @@ import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisURI;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.async.RedisAsyncCommands;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +14,10 @@ import java.time.temporal.ChronoUnit;
 @Configuration
 @ConfigurationProperties(prefix = "redis")
 public class BeanConfiguration {
+
+    /**
+     * 用户登录状态：u+$id
+     */
     @Bean
     public RedisAsyncCommands<String, String> redisAsyncCommands() {
         RedisURI redisUri = RedisURI.builder()

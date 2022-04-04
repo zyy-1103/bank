@@ -1,5 +1,6 @@
 package com.bank.controller;
 
+import com.bank.service.UserService;
 import com.bank.utils.CookieUtil;
 import com.bank.utils.SM3;
 import io.lettuce.core.api.async.RedisAsyncCommands;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,12 +18,25 @@ public class UserInterceptor implements HandlerInterceptor {
     @Autowired
     RedisAsyncCommands<String, String> commands;
 
+    public UserInterceptor(RedisAsyncCommands<String, String> commands) {
+        this.commands=commands;
+    }
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        System.out.println("yes");
         String id = CookieUtil.getCookieValueByName("id", request);
         String word = CookieUtil.getCookieValueByName("word", request);
-        if (SM3.encryptWithSalt(id).equals(word)) {
-
+        if (SM3.encryptWithSalt(id).equals(word)&&commands.get("u"+id)!=null) {
+            commands.expire("u" + id, UserService.USER_TIME_OUT);
+            Cookie id1 = CookieUtil.getCookieByName("id", request.getCookies());
+            Cookie word1 = CookieUtil.getCookieByName("word", request.getCookies());
+            if (id1 != null && word1 != null) {
+                id1.setMaxAge((int) UserService.USER_TIME_OUT);
+                word1.setMaxAge((int) UserService.USER_TIME_OUT);
+                response.addCookie(id1);
+                response.addCookie(word1);
+            }
         }
         return true;
     }

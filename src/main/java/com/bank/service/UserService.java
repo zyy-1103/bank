@@ -19,7 +19,6 @@ public class UserService {
     UserMapper mapper;
     @Autowired
     RedisAsyncCommands<String, String> commands;
-
     JSONObject object = new JSONObject();
 
     public String login(UserBean bean, HttpServletResponse response) {
@@ -37,6 +36,8 @@ public class UserService {
             Cookie wordCookie = new Cookie("word", SM3.encryptWithSalt(id.toString()));
             idCookie.setPath("/");
             wordCookie.setPath("/");
+            idCookie.setMaxAge((int)UserService.USER_TIME_OUT);
+            wordCookie.setMaxAge((int)UserService.USER_TIME_OUT);
             response.addCookie(idCookie);
             response.addCookie(wordCookie);
         } else {
