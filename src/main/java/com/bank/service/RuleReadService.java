@@ -24,8 +24,6 @@ public class RuleReadService{
             commands.set("_total", notOver.getTotal());
             commands.set("_price", notOver.getPrice());
             commands.set("_remain", notOver.getTotal());
-
         }
-
     }
 }
