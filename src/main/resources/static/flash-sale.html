@@ -34,7 +34,7 @@
 
 </head>
 <body>
-<header>
+<header id="header">
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
         <h3 class="my-0 mr-md-auto font-weight-normal">
             <img src="./images/logo.png" alt="" width="80" height="60">
@@ -45,7 +45,7 @@
                 <a class="p-2 text-dark" href="./index.html">首页</a>
                 <a class="p-2 text-dark" href="./flash-sale.html">秒杀</a>
                 <a class="p-2 text-dark" href="./commodities.html">产品</a>&nbsp;&nbsp;
-                <a class="btn btn-outline-primary btn-lg" href="./login.html">登录 / 注册</a>
+                <a v-show="!c" class="btn btn-outline-primary btn-lg" href="./login.html">登录 / 注册</a>
             </h5>
         </nav>
     </div>
@@ -80,6 +80,7 @@
                             </h1>
                             <br>
                             <div class="mb-1 text-muted">2022年/10月/10日/00：00开启</div>
+                            <div class="mb-1 text-muted">2022年/10月/10日/00：00截止</div>
                             <br>
                             <span style="font-size: large">存款共一万份（1万元/份），总金额1亿元，单用户只能购买一份</span>
                             <br><br><br><br>
@@ -106,7 +107,18 @@
 <script src="./js/jquery.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="./js/jquery.min.js"><\/script>')</script>
-<script src="../bootstrap-4.6.1/js/bootstrap.bundle.min.js"></script>
-
+<script src="./bootstrap-4.6.1/js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/vue.min.js"></script>
+<script>
+    let c = $.cookie('id');
+    Vue.createApp({
+        data(){
+            return{
+                c:c
+            }
+        }
+    }).mount("header")
+</script>
 </body>
 </html>

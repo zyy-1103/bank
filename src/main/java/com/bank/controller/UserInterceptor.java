@@ -24,7 +24,6 @@ public class UserInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("yes");
         String id = CookieUtil.getCookieValueByName("id", request);
         String word = CookieUtil.getCookieValueByName("word", request);
         if (SM3.encryptWithSalt(id).equals(word)&&commands.get("u"+id)!=null) {

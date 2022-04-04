@@ -15,8 +15,13 @@ import java.time.temporal.ChronoUnit;
 @ConfigurationProperties(prefix = "redis")
 public class BeanConfiguration {
 
+    public Thread thread(){
+        return null;
+    }
+
     /**
      * 用户登录状态：u+$id
+     * 商品配置：_+$field
      */
     @Bean
     public RedisAsyncCommands<String, String> redisAsyncCommands() {
