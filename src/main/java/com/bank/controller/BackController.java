@@ -13,9 +13,6 @@ public class BackController {
 
     @GetMapping(value = "test")
     public String test(){
-        service.init();
         return "hello";
     }
-
-
 }

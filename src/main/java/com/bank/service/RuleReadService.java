@@ -4,26 +4,18 @@ import com.bank.bean.ComInfo;
 import com.bank.mapper.BackMapper;
 import io.lettuce.core.api.async.RedisAsyncCommands;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.*;
+import java.text.ParseException;
 
 @Service
-public class RuleReadService implements Runnable{
+public class RuleReadService{
     @Autowired
     RedisAsyncCommands<String, String> commands;
     @Autowired
     BackMapper mapper;
-    ScheduledFuture<?> future;
 
-    public void init(){
-        ScheduledExecutorService service= Executors.newScheduledThreadPool(1);
-        future = service.scheduleAtFixedRate(new RuleReadService(), 1, 1, TimeUnit.SECONDS);
-    }
-
-    @Override
-    public void run() {
+    public void init() throws ParseException {
         ComInfo notOver = mapper.getNotOver();
         if (notOver != null) {
             commands.set("_start", notOver.getStartTime());
@@ -32,6 +24,8 @@ public class RuleReadService implements Runnable{
             commands.set("_total", notOver.getTotal());
             commands.set("_price", notOver.getPrice());
             commands.set("_remain", notOver.getTotal());
+
         }
+
     }
 }

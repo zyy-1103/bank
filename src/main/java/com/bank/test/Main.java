@@ -1,19 +1,10 @@
 package com.bank.test;
-
-
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Main {
-    public static void main(String[] args) {
-        long s=System.currentTimeMillis()+5000;
-        ScheduledFuture<?> scheduledFuture = Executors.newScheduledThreadPool(1)
-                .scheduleWithFixedDelay(() -> {
-                    System.out.println(System.currentTimeMillis());
-                }, 1, 1, TimeUnit.SECONDS);
-        if (System.currentTimeMillis() > s) {
-            scheduledFuture.cancel(false);
-        }
+    public static void main(String[] args) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
     }
 }
