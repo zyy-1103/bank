@@ -7,10 +7,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
     <title>flash-sale</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../bootstrap-4.6.1/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="./bootstrap-4.6.1/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -53,19 +50,10 @@
 </header>
 
 <main role="main">
-
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
-
     <div style="text-align: center;font-size: x-large">——— 秒杀专区 ———</div>
-
     <hr>
-
-    <div class="album py-5 bg-light">
-
+    <div class="album py-5 bg-light" id="msg">
         <div class="container">
-
             <div class="row mb-2">
                 <div class="col-md-12">
                     <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -79,24 +67,32 @@
                                 </h5>
                             </h1>
                             <br>
-                            <div class="mb-1 text-muted">开始时间：2022年/10月/10日/00：00</div>
-                            <div class="mb-1 text-muted">截止时间：2022年/10月/10日/00：00</div>
+                            <div class="mb-1 text-muted" style="font-size: large">开始时间：{{start}}</div>
+                            <div class="mb-1 text-muted" style="font-size: large">截止时间：{{end}}</div>
                             <br>
-                            <span style="font-size: large">存款共一万份（1万元/份），总金额1亿元，单用户只能购买一份</span>
-                            <br><br><br><br>
-                            <a href="./flash-product.html  " style="font-size: x-large">进入抢购</a>
+                            <span style="font-size: x-large">存款共{{quantity}}份（{{price}}元/份）,总金额{{total}}元</span>
+                                <span style="font-size: x-large">单用户只能购买一份</span>
+                            <br><br>
+                            <a href="./flash-product.html" style="font-size: x-large" v-show="capable">{{loginText}}</a>
+                            <span style="font-size: large;color: orangered" v-show="!capable">{{loginText}}</span>
                         </div>
                         <div class="col-md-4">
-                            <img src="./images/SanXiang.jpg" alt="..." width="100%" height="100%">
+                            <img src="./images/SanXiang.jpg" alt="..." style="height: 100%;width: 100%">
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-
+        <div class="container">
+            <h5>秒杀规则：</h5><br>
+            个人客户年龄小于18岁;
+            逾期记录-近3年逾期2次以上（金额小于1000元，3天内还清的除外）;
+            个人客户工作状态异常-状态为“无业/失业”;
+            个人客户被列入失信人名单-个人客户被列入当前严重违法失信被执行人名单，未执行完毕的;
+            有以上记录的客户将无法参与秒杀活动，且符合条件的客户只能购买一份。<br>
+        </div>
     </div>
-
     <!-- FOOTER -->
     <footer class="container">
         <p class="float-right"><a href="#">Back to top</a></p>
@@ -104,9 +100,7 @@
     </footer>
 </main>
 
-<script src="./js/jquery.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="./js/jquery.min.js"><\/script>')</script>
+<script src="js/jquery.min.js"></script>
 <script src="./bootstrap-4.6.1/js/bootstrap.bundle.min.js"></script>
 <script src="js/jquery.cookie.js"></script>
 <script src="js/vue.min.js"></script>
@@ -120,5 +114,6 @@
         }
     }).mount("header")
 </script>
+<script src="js/flash-sale.js"></script>
 </body>
 </html>

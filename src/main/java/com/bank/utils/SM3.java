@@ -6,6 +6,10 @@ import org.bouncycastle.crypto.digests.SM3Digest;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.pqc.math.linearalgebra.ByteUtils;
 
+/**
+ * 用户名登录等信息直接加密
+ * 存在cookie中的id需要加盐
+ */
 public class SM3 {
     private static final String SALT = "E~ThisIs+MySALT__";
     private static final String ENCODING = "UTF-8";

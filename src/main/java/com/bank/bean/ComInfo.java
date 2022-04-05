@@ -14,4 +14,5 @@ public class ComInfo {
     private String total;
     private String startTime;
     private String endTime;
+    private String isOver;
 }

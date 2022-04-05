@@ -10,4 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface BackMapper {
     @Select("select * from com_info where is_over=0 limit 1")
     ComInfo getNotOver();
+
+    @Select("select count(*) from back_user where user=#{user} and password=#{password}")
+    Integer isUser(String user,String password);
 }
