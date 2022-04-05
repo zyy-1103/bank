@@ -13,6 +13,8 @@ public class OverdueRuleBean {
     private String count;
     private String operator;
     private String exCount;
+    private String exCountOperator;
     private String exTime;
-    private String exOperator;
+    private String exTimeUnit;
+    private String exTimeOperator;
 }

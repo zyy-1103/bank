@@ -1,5 +1,7 @@
 package com.bank.configuration;
 
+import com.bank.bean.OverdueRuleBean;
+import com.bank.bean.UserRuleBean;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisURI;
 import io.lettuce.core.api.StatefulRedisConnection;
@@ -22,6 +24,8 @@ public class BeanConfiguration {
     /**
      * 用户登录状态：u+$id
      * 商品配置：_+$field
+     * 是否配置了逾期规则: ~overdue
+     * 是否配置了用户属性规则: ~userRule
      */
     @Bean
     public RedisAsyncCommands<String, String> redisAsyncCommands() {
@@ -32,5 +36,15 @@ public class BeanConfiguration {
         RedisClient client = RedisClient.create(redisUri);
         StatefulRedisConnection<String, String> connection = client.connect();
         return connection.async();
+    }
+
+    @Bean
+    public UserRuleBean userRuleBean(){
+        return new UserRuleBean();
+    }
+
+    @Bean
+    public OverdueRuleBean overdueRuleBean(){
+        return new OverdueRuleBean();
     }
 }

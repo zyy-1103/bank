@@ -1,6 +1,7 @@
 package com.bank.service;
 
 import com.bank.bean.ComInfo;
+import com.bank.bean.OverdueRuleBean;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -28,5 +29,11 @@ class BackServiceTest {
     @Test
     void login(){
 
+    }
+
+    @Test
+    void overdue(){
+        OverdueRuleBean bean = new OverdueRuleBean("2000-01-01", "2022-4-5", "0", ">", "0", ">=", "3", "day", ">=");
+        service.overdue(bean);
     }
 }
