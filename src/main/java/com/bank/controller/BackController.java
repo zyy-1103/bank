@@ -17,19 +17,23 @@ public class BackController {
     @Autowired
     BackService service;
 
-    @GetMapping(value = "start")
-    public void test() throws ParseException {
-        service.init();
+    @PostMapping(value = "config")
+    public String config(@RequestBody ComInfo comInfo) throws ParseException {
+        return service.config(comInfo);
     }
 
-    @PostMapping(value = "config")
-    public String config(@RequestBody ComInfo comInfo) {
-        return service.config(comInfo);
+    /**
+     *     如果出现意外情况导致服务器宕机，可以发送请求
+     *     手动将最近一次商品信息读入redis中
+     */
+    @GetMapping(value = "startLatest")
+    public void start() throws ParseException {
+        service.init();
     }
 
     @PostMapping(value = "overdue")
     public String overdue(@RequestBody OverdueRuleBean bean) {
-        return null;
+        return service.overdue(bean);
     }
 
     @PostMapping(value = "userRule")
@@ -42,9 +46,15 @@ public class BackController {
         return service.login(bean);
     }
 
-    @GetMapping("/test")
-    public String test1() {
-
-        return "success";
+    @RequestMapping(value = "getTestData")
+    public String getData() {
+        return service.getDataTest();
     }
+
+    @RequestMapping(value = "getAll")
+    public String getAll(){
+        return service.getAll();
+    }
+
+
 }

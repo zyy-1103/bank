@@ -24,7 +24,9 @@ public class BeanConfiguration {
     /**
      * 用户登录状态：u+$id
      * 商品配置：_+$field
-     * 是否配置了逾期规则: ~overdue
+     * 逾期规则sql: ~odsql
+     * 逾期规则次数: ~odcnt
+     * 逾期规则操作符: ~odope
      * 是否配置了用户属性规则: ~userRule
      */
     @Bean

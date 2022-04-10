@@ -1,5 +1,6 @@
 package com.bank.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bank.bean.ComInfo;
 import com.bank.bean.OverdueRuleBean;
 import org.junit.jupiter.api.Assertions;
@@ -8,6 +9,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,7 +22,7 @@ class BackServiceTest {
     BackService service;
 
     @Test
-    void config() {
+    void config() throws ParseException {
         ComInfo comInfo = new ComInfo("0", "1000", "1000", "1000", "2020-01-01 00:00:00", "2020-01-03 00:00:00", "0");
         String config = service.config(comInfo);
         System.out.println(config);
@@ -36,4 +39,5 @@ class BackServiceTest {
         OverdueRuleBean bean = new OverdueRuleBean("2000-01-01", "2022-4-5", "0", ">", "0", ">=", "3", "day", ">=");
         service.overdue(bean);
     }
+
 }

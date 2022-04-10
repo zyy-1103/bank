@@ -28,6 +28,8 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="./css/carousel.css">
     <link rel="shortcut icon" href="./images/logo.png">
+    <script src="js/vue.min.js"></script>
+    <script src="js/axios.min.js"></script>
 </head>
 <body>
 
@@ -39,8 +41,7 @@
     <span style="text-align: center;font-size: x-large">——— 商品秒杀 ———</span>
 </span><br><br>
 
-<div class="album py-5 bg-light">
-
+<div class="album py-5 bg-light" id="all">
     <div class="container">
 
         <div class="row mb-2">
@@ -51,7 +52,7 @@
                             <br><br>
                             <h5 class="d-inline-block mb-2 text-primary">
                                 <span>
-                                    <img src="./images/alarm.svg" alt="">&nbsp;&nbsp;&nbsp;01:16:32
+                                    <img src="./images/alarm.svg" alt="">&nbsp;&nbsp;&nbsp;{{hour}}:{{minute}}:{{second}}
                                 </span>
                             </h5>
                         </h1>
@@ -62,7 +63,8 @@
                         <br><br><br><br>
                         <!--                        <a href="./flash-product.html  " style="font-size: x-large">准备抢购</a>-->
 
-                        <input id="flashBuy" data-toggle="modal" data-target="#exampleModal" value="立即秒杀" class="btn btn-secondary"style="width: 20%;" disabled>
+                        <input id="flashBuy" data-toggle="modal" data-target="#exampleModal" value="立即秒杀" class="btn btn-danger"style="width: 20%;">
+<!--                        <input id="flashBuy" data-toggle="modal" data-target="#exampleModal" value="立即秒杀" class="btn btn-secondary"style="width: 20%;">-->
 
                     </div>
 
@@ -113,40 +115,16 @@
 </footer>
 
 
-<script src="./js/jquery.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="./js/jquery.min.js"><\/script>')</script>
-<script src="../bootstrap-4.6.1/js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="./bootstrap-4.6.1/js/bootstrap.bundle.min.js"></script>
 
-<script>
+<!--<script>-->
 
-    $('#flashBuy').attr('disabled', false);
-    document.getElementById("flashBuy").setAttribute('class','btn btn-danger');
+<!--    $('#flashBuy').attr('disabled', false);-->
+<!--    document.getElementById("flashBuy").setAttribute('class','btn btn-danger');-->
 
-</script>
+<!--</script>-->
 
-<script type="text/javascript">
-
-    var flashBuyBtn = document.getElementById('flashBuy');
-    var flashConfrim = document.getElementById('flash-Confirm');
-
-    flashConfrim.onclick = function() {
-        flashBuyBtn.disabled = 'disabled';
-        flashBuyBtn.setAttribute('class','btn btn-secondary');
-        var time = 60;
-        var timer = setInterval(function() {
-            if (time == -1) {
-                clearInterval(timer)
-                flashBuyBtn.disabled = '';
-                flashBuyBtn.setAttribute('class','btn btn-danger');
-                flashBuyBtn.value = '重新秒杀';
-            } else {
-                flashBuyBtn.value = time + '秒后重新点击';
-                time--;
-            }
-        }, 1000)
-    }
-</script>
-
+<script src="js/flash-product.js"></script>
 </body>
 </html>

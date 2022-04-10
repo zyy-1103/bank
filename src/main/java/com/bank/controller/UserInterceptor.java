@@ -26,6 +26,7 @@ public class UserInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String id = CookieUtil.getCookieValueByName("id", request);
         String word = CookieUtil.getCookieValueByName("word", request);
+        //心跳请求，延长redis、cookie中用户标识时间
         if (SM3.encryptWithSalt(id).equals(word)&&commands.get("u"+id)!=null) {
             commands.expire("u" + id, UserService.USER_TIME_OUT);
             Cookie id1 = CookieUtil.getCookieByName("id", request.getCookies());

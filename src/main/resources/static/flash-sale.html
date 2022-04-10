@@ -28,92 +28,83 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="./css/carousel.css">
     <link rel="shortcut icon" href="./images/logo.png">
-
+    <script src="js/jquery.min.js"></script>
+    <script src="./bootstrap-4.6.1/js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script src="js/axios.min.js"></script>
 </head>
 <body>
-<header id="header">
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-        <h3 class="my-0 mr-md-auto font-weight-normal">
-            <img src="./images/logo.png" alt="" width="80" height="60">
-            三湘银行
-        </h3>
-        <nav class="my-2 my-md-0 mr-md-3">
-            <h5>
-                <a class="p-2 text-dark" href="./index.html">首页</a>
-                <a class="p-2 text-dark" href="./flash-sale.html">秒杀</a>
-                <a class="p-2 text-dark" href="./commodities.html">产品</a>&nbsp;&nbsp;
-                <a v-show="!c" class="btn btn-outline-primary btn-lg" href="./login.html">登录 / 注册</a>
-            </h5>
-        </nav>
-    </div>
-    <br>
-</header>
+<div id="all">
+    <header id="header">
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+            <h3 class="my-0 mr-md-auto font-weight-normal">
+                <img src="./images/logo.png" alt="" width="80" height="60">
+                三湘银行
+            </h3>
+            <nav class="my-2 my-md-0 mr-md-3">
+                <h5>
+                    <a class="p-2 text-dark" href="./index.html">首页</a>
+                    <a class="p-2 text-dark" href="./flash-sale.html">秒杀</a>
+                    <a class="p-2 text-dark" href="./commodities.html">产品</a>&nbsp;&nbsp;
+                    <a v-show="!c" class="btn btn-outline-primary btn-lg" href="./login.html">登录 / 注册</a>
+                </h5>
+            </nav>
+        </div>
+        <br>
+    </header>
 
-<main role="main">
-    <div style="text-align: center;font-size: x-large">——— 秒杀专区 ———</div>
-    <hr>
-    <div class="album py-5 bg-light" id="msg">
-        <div class="container">
-            <div class="row mb-2">
-                <div class="col-md-12">
-                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                        <div class="col p-4 d-flex flex-column position-static">
-                            <h1 style="color: #a71d2a">万元存款
-                                <br><br>
-                                <h5 class="d-inline-block mb-2 text-primary">
-                                    <a href="./flash-sale.html">
-                                        <img src="./images/alarm.svg" alt="">&nbsp;&nbsp;&nbsp;限时秒杀
-                                    </a>
-                                </h5>
-                            </h1>
-                            <br>
-                            <div class="mb-1 text-muted" style="font-size: large">开始时间：{{start}}</div>
-                            <div class="mb-1 text-muted" style="font-size: large">截止时间：{{end}}</div>
-                            <br>
-                            <span style="font-size: x-large">存款共{{quantity}}份（{{price}}元/份）,总金额{{total}}元</span>
+    <main role="main">
+        <div style="text-align: center;font-size: x-large">——— 秒杀专区 ———</div>
+        <hr>
+        <div class="album py-5 bg-light" id="msg">
+            <div class="container">
+                <div class="row mb-2">
+                    <div class="col-md-12">
+                        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <h1 style="color: #a71d2a">万元存款
+                                    <br><br>
+                                    <h5 class="d-inline-block mb-2 text-primary">
+                                        <a href="./flash-sale.html">
+                                            <img src="./images/alarm.svg" alt="">&nbsp;&nbsp;&nbsp;限时秒杀
+                                        </a>
+                                    </h5>
+                                </h1>
+                                <br>
+                                <div class="mb-1 text-muted" style="font-size: large">开始时间：{{start}}</div>
+                                <div class="mb-1 text-muted" style="font-size: large">截止时间：{{end}}</div>
+                                <br>
+                                <span style="font-size: x-large">存款共{{quantity}}份（{{price}}元/份）,总金额{{total}}元</span>
                                 <span style="font-size: x-large">单用户只能购买一份</span>
-                            <br><br>
-                            <a href="./flash-product.html" style="font-size: x-large" v-show="capable">{{loginText}}</a>
-                            <span style="font-size: large;color: orangered" v-show="!capable">{{loginText}}</span>
-                        </div>
-                        <div class="col-md-4">
-                            <img src="./images/SanXiang.jpg" alt="..." style="height: 100%;width: 100%">
+                                <br><br>
+                                <a href="./flash-product.html" style="font-size: x-large" v-show="capable">{{loginText}}</a>
+                                <span style="font-size: large;color: orangered" v-show="!capable">{{loginText}}</span>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="./images/SanXiang.jpg" alt="..." style="height: 100%;width: 100%">
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
-
+            <div class="container">
+                <h5>秒杀规则：</h5><br>
+                个人客户年龄小于18岁;
+                逾期记录-近3年逾期2次以上（金额小于1000元，3天内还清的除外）;
+                个人客户工作状态异常-状态为“无业/失业”;
+                个人客户被列入失信人名单-个人客户被列入当前严重违法失信被执行人名单，未执行完毕的;
+                有以上记录的客户将无法参与秒杀活动，且符合条件的客户只能购买一份。<br>
+            </div>
         </div>
-        <div class="container">
-            <h5>秒杀规则：</h5><br>
-            个人客户年龄小于18岁;
-            逾期记录-近3年逾期2次以上（金额小于1000元，3天内还清的除外）;
-            个人客户工作状态异常-状态为“无业/失业”;
-            个人客户被列入失信人名单-个人客户被列入当前严重违法失信被执行人名单，未执行完毕的;
-            有以上记录的客户将无法参与秒杀活动，且符合条件的客户只能购买一份。<br>
-        </div>
-    </div>
-    <!-- FOOTER -->
-    <footer class="container">
-        <p class="float-right"><a href="#">Back to top</a></p>
-        <p>We are all Dream-Builders.&middot; <a href="#">Nothing</a> &middot; <a href="#">Teams</a></p>
-    </footer>
-</main>
-
-<script src="js/jquery.min.js"></script>
-<script src="./bootstrap-4.6.1/js/bootstrap.bundle.min.js"></script>
-<script src="js/jquery.cookie.js"></script>
-<script src="js/vue.min.js"></script>
-<script>
-    let c = $.cookie('id');
-    Vue.createApp({
-        data(){
-            return{
-                c:c
-            }
-        }
-    }).mount("header")
-</script>
+        <!-- FOOTER -->
+        <footer class="container">
+            <p class="float-right"><a href="#">Back to top</a></p>
+            <p>We are all Dream-Builders.&middot; <a href="#">Nothing</a> &middot; <a href="#">Teams</a></p>
+        </footer>
+    </main>
+</div>
 <script src="js/flash-sale.js"></script>
 </body>
 </html>

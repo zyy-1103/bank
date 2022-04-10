@@ -1,36 +1,59 @@
 package com.bank.service;
 
+import com.alibaba.fastjson.JSONObject;
+import com.bank.bean.AddressChart;
 import com.bank.bean.ComInfo;
 import com.bank.bean.OverdueRuleBean;
 import com.bank.bean.UserBean;
-import com.bank.bean.UserRuleBean;
 import com.bank.mapper.BackMapper;
 import com.bank.mapper.ComInfoMapper;
 import com.bank.utils.SM3;
 import io.lettuce.core.api.async.RedisAsyncCommands;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class BackService {
+
+    private static final long PRE_TIME=1000*60*30;
+
     @Autowired
     RedisAsyncCommands<String, String> commands;
     @Autowired
     BackMapper mapper;
     @Autowired
     ComInfoMapper infoMapper;
-    @Autowired
-    OverdueRuleBean overdueRuleBean;
-    @Autowired
-    UserRuleBean userRuleBean;
+
+
+    public String getProvinces(String seckillId) {
+        JSONObject object = new JSONObject();
+        object.put("data", mapper.selectProvinces(seckillId));
+        return object.toJSONString();
+    }
+
+    public String getDataTest(){
+        JSONObject object = new JSONObject();
+        object.put("data", mapper.selectTest());
+        return object.toJSONString();
+    }
+
+    public String getAll(){
+        JSONObject object = new JSONObject();
+        object.put("data", mapper.selectAll());
+        return object.toJSONString();
+    }
 
     public void init() throws ParseException {
-        ComInfo notOver = mapper.getNotOver();
+        //将最新并且没有执行完毕的一条商品信息存入redis
+        ComInfo notOver = infoMapper.selectLatest();
         if (notOver != null) {
             commands.set("_start", notOver.getStartTime());
             commands.set("_end", notOver.getEndTime());
@@ -41,10 +64,27 @@ public class BackService {
         }
     }
 
-    public String config(ComInfo info) {
-        System.out.println("here");
+    //配置秒杀规则，将后台传递的商品信息存入数据库
+    public String config(ComInfo info) throws ParseException {
         info.setId("0");
         int insert = infoMapper.insert(info);
+        Date parse = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(info.getStartTime());
+        long cur = System.currentTimeMillis();
+        ScheduledExecutorService service = Executors.newScheduledThreadPool(1);
+        if (parse.getTime() + PRE_TIME >= cur) {
+            //距离秒杀开始时间小于预热时间（PRE_TIME）
+            init();
+        }else {
+            //定时任务，在距秒杀开始剩余PRE_TIME时执行init，将商品信息读入redis
+            service.schedule(() -> {
+                try {
+                    init();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                service.shutdown();
+            }, cur - parse.getTime() - PRE_TIME, TimeUnit.MILLISECONDS);
+        }
         return String.valueOf(insert);
     }
 
@@ -53,6 +93,7 @@ public class BackService {
         return String.valueOf(mapper.isUser(bean.getUser(), bean.getPassword()));
     }
 
+    //将逾期记录规则写入redis
     public String overdue(OverdueRuleBean bean) {
         StringBuilder builder = new StringBuilder();
         if (bean.getStart() == null || bean.getEnd() == null && bean.getCount() == null) {
@@ -71,7 +112,10 @@ public class BackService {
             }
             builder.append(" and amount").append(bean.getOperator()).append(" ").append(bean.getExCount());
         }
-        System.out.println(builder);
-        return builder.toString();
+        commands.set("~odcnt", bean.getCount());
+        commands.set("~odope", bean.getOperator());
+        commands.set("~odsql", builder.toString());
+        return "1";
     }
+
 }

@@ -10,10 +10,11 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SecResultBean {
-    private long id;
-    private long peopleNum;
-    private long spendTime;
+    private Long id;
+    private Long peopleNum;
+    private Long spendTime;
     private Date date;
-    private long price;
-    private long quantity;
+    private Double price;
+    private Long quantity;
+    private Double total;
 }
