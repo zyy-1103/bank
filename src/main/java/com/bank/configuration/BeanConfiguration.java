@@ -24,6 +24,8 @@ public class BeanConfiguration {
     /**
      * 用户登录状态：u+$id
      * 商品配置：_+$field
+     * 是否已配置商品信息：~isConfigured
+     * 秒杀URL：~url
      * 逾期规则sql: ~odsql
      * 逾期规则次数: ~odcnt
      * 逾期规则操作符: ~odope

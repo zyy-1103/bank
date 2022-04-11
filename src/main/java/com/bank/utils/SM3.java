@@ -1,13 +1,14 @@
 package com.bank.utils;
 import java.io.UnsupportedEncodingException;
 import java.security.Security;
+import java.util.Random;
 
 import org.bouncycastle.crypto.digests.SM3Digest;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.pqc.math.linearalgebra.ByteUtils;
 
 /**
- * 用户名登录等信息直接加密
+ * 所有加密信息全部加盐
  * 存在cookie中的id需要加盐
  */
 public class SM3 {
@@ -16,6 +17,12 @@ public class SM3 {
 
     static {
         Security.addProvider(new BouncyCastleProvider());
+    }
+
+    //获取随机地址
+    public static String getUrl() {
+        String s = encryptWithSalt(String.valueOf(new Random().nextDouble())).substring(10, 50);
+        return encryptWithSalt(s).substring(5, 35);
     }
 
     public static String encryptWithSalt(String paramStr) {

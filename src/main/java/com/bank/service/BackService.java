@@ -70,7 +70,15 @@ public class BackService {
         int insert = infoMapper.insert(info);
         Date parse = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(info.getStartTime());
         long cur = System.currentTimeMillis();
-        ScheduledExecutorService service = Executors.newScheduledThreadPool(1);
+
+        ScheduledExecutorService service = Executors.newScheduledThreadPool(2);
+
+        //秒杀开始时，将随机url存入redis
+        service.schedule(() -> {
+            commands.set("~url", SM3.getUrl());
+            service.shutdown();
+        }, System.currentTimeMillis() - parse.getTime(), TimeUnit.MILLISECONDS);
+
         if (parse.getTime() + PRE_TIME >= cur) {
             //距离秒杀开始时间小于预热时间（PRE_TIME）
             init();
@@ -82,7 +90,6 @@ public class BackService {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                service.shutdown();
             }, cur - parse.getTime() - PRE_TIME, TimeUnit.MILLISECONDS);
         }
         return String.valueOf(insert);

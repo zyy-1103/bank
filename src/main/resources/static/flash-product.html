@@ -63,9 +63,8 @@
                         <br><br><br><br>
                         <!--                        <a href="./flash-product.html  " style="font-size: x-large">准备抢购</a>-->
 
-                        <input id="flashBuy" data-toggle="modal" data-target="#exampleModal" value="立即秒杀" class="btn btn-danger"style="width: 20%;">
-<!--                        <input id="flashBuy" data-toggle="modal" data-target="#exampleModal" value="立即秒杀" class="btn btn-secondary"style="width: 20%;">-->
-
+                        <input v-if="!this.time" v-on:click="go()" id="flashBuy" data-toggle="modal" data-target="#exampleModal" value="立即秒杀" class="btn btn-danger"style="width: 20%;">
+                        <input v-if="this.time" value="立即秒杀" disabled class="btn btn-secondary" style="width: 20%;">
                     </div>
 
                     <div class="col-md-4">
@@ -124,7 +123,7 @@
 <!--    document.getElementById("flashBuy").setAttribute('class','btn btn-danger');-->
 
 <!--</script>-->
-
+<script src="js/jquery.cookie.js"></script>
 <script src="js/flash-product.js"></script>
 </body>
 </html>

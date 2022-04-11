@@ -9,7 +9,7 @@ Vue.createApp({
             quantity:0,
             price:0,
             total:0,
-            loginText:'进入秒杀',
+            loginText:'请登录',
             capable:0
         }
     },
@@ -31,6 +31,8 @@ Vue.createApp({
                     this.capable=r.capable;
                     if (!this.capable) {
                         this.loginText = "您不符合本次活动规则";
+                    }else{
+                        this.loginText="进入秒杀"
                     }
                     this.start=res.startTime;
                     this.quantity=res.quantity;
@@ -39,6 +41,8 @@ Vue.createApp({
                     this.endTime=res.endTime;
                 }
             });
+        }else {
+            this.loginText="请登录"
         }
     }
 }).mount("#all");

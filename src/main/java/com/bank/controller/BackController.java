@@ -55,6 +55,4 @@ public class BackController {
     public String getAll(){
         return service.getAll();
     }
-
-
 }

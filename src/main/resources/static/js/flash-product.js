@@ -1,11 +1,28 @@
+let id = $.cookie("id");
+let word=$.cookie("word")
 Vue.createApp({
     data(){
         return{
             hour:'',
             minute:'',
             second:'',
-            time:0,
-            a:new Date()
+            time:1,
+            a:new Date(),
+            url:'#'
+        }
+    },
+    methods:{
+        go(){
+            axios({
+                url:"seckill/"+url,
+                method:"post",
+                data:{
+                    id:id,
+                    word:word
+                }
+            }).then(res=>{
+                alert(res.data);
+            })
         }
     },
     created(){
@@ -17,24 +34,42 @@ Vue.createApp({
             if (res== -1) {
                 this.hour="正在准备中..."
             }else{
-                this.time=res-new Date().getTime();
-                let temp=new Date();
-                temp.setTime(this.time);
-                let timer=setInterval(()=>{
-                    if (this.time <= 0) {
-                        this.hour = this.minute = this.second = "00"
-                        clearInterval(timer);
-                        return;
-                    }
-                    this.time-=1000;
-                },1000)
+                this.time = res - new Date().getTime();
+                if (this.time < 0) {
+                    this.time=0;
+                    this.hour = this.minute = this.second = "00"
+                }else{
+                    let temp=new Date();
+                    temp.setTime(this.time);
+                    let timer=setInterval(()=>{
+                        if (this.time <= 0) {
+                            this.time=0;
+                            this.hour = this.minute = this.second = "00"
+                            clearInterval(timer);
+                            return;
+                        }
+                        this.time-=1000;
+                    },1000)
+                }
             }
         })
     },
     watch:{
         time(){
+            if (this.time == 0) {
+                axios({
+                    url:"getUrl",
+                    method:"post",
+                    data:{
+                        id:id,
+                        word:word
+                    }
+                }).then(res=>{
+                    this.url=res.data;
+                })
+            }
             this.a.setTime(this.time);
-            this.hour=this.a.getHours();
+            this.hour=parseInt(this.time/1000/60/60);
             this.minute=this.a.getMinutes();
             this.second=this.a.getSeconds();
         }
