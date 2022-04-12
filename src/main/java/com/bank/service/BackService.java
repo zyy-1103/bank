@@ -60,7 +60,7 @@ public class BackService {
             commands.set("_quantity", notOver.getQuantity());
             commands.set("_total", notOver.getTotal());
             commands.set("_price", notOver.getPrice());
-            commands.set("_remain", notOver.getTotal());
+            commands.set("_remain", notOver.getQuantity());
         }
     }
 

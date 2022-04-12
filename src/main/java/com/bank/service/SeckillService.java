@@ -98,9 +98,10 @@ public class SeckillService {
     public String go(String s, String url) throws ExecutionException, InterruptedException {
         JSONObject object = JSONObject.parseObject(s);
         String id = object.getString("id");
-        if (url.equals(commands.get("url").get())) {
-            return "秒杀成功";
+        if (url.equals(commands.get("url").get()) && Integer.parseInt(commands.get("~remain").get())>0) {
+            Long aLong = commands.decr("~remain").get();
+
         }
-        return "秒杀失败";
+        return "已售罄";
     }
 }
