@@ -23,7 +23,7 @@ class BackServiceTest {
 
     @Test
     void config() throws ParseException {
-        ComInfo comInfo = new ComInfo("0", "1000", "1000", "1000", "2020-01-01 00:00:00", "2020-01-03 00:00:00", "0");
+        ComInfo comInfo = new ComInfo("0", "1000", "1000", "1000", "2020-01-01 00:00:00", "2020-01-03 00:00:00", "0", "1");
         String config = service.config(comInfo);
         System.out.println(config);
         Assertions.assertEquals(config, "1");

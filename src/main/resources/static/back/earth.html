@@ -2,278 +2,289 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Awesome-pyecharts</title>
+    <link rel="icon" href="../../images/logo.png">
+    <title>地址分布</title>
             <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
         <script type="text/javascript" src="https://assets.pyecharts.org/assets/maps/china.js"></script>
 </head>
 <body>
-    <div id="c723826aa2d24ac6a37a0e3da5a57741" class="chart-container" style="width:900px; height:500px;"></div>
+    <div id="c723826aa2d24ac6a37a0e3da5a57741" class="chart-container" style="width:1200px; height:700px;"></div>
+    <script src="../../js/axios.min.js"></script>
     <script>
-
-        var chart_c723826aa2d24ac6a37a0e3da5a57741 = echarts.init(
-            document.getElementById('c723826aa2d24ac6a37a0e3da5a57741'), 'white', {renderer: 'canvas'});
-        var option_c723826aa2d24ac6a37a0e3da5a57741 = {
-    "animation": true,
-    "animationThreshold": 2000,
-    "animationDuration": 1000,
-    "animationEasing": "cubicOut",
-    "animationDelay": 0,
-    "animationDurationUpdate": 300,
-    "animationEasingUpdate": "cubicOut",
-    "animationDelayUpdate": 0,
-    "color": [
-        "#c23531",
-        "#2f4554",
-        "#61a0a8",
-        "#d48265",
-        "#749f83",
-        "#ca8622",
-        "#bda29a",
-        "#6e7074",
-        "#546570",
-        "#c4ccd3",
-        "#f05b72",
-        "#ef5b9c",
-        "#f47920",
-        "#905a3d",
-        "#fab27b",
-        "#2a5caa",
-        "#444693",
-        "#726930",
-        "#b2d235",
-        "#6d8346",
-        "#ac6767",
-        "#1d953f",
-        "#6950a1",
-        "#918597"
-    ],
-    "series": [
-        {
-            "type": "map",
-            "name": "\u5404\u7701\u4eba\u53e3\u6570\u91cf",
-            "label": {
-                "show": true,
-                "position": "top",
-                "margin": 8
-            },
-            "mapType": "china",
-            "data": [
-                {
-                    //浙江
-                    "name": "\u6d59\u6c5f",
-                    "value": 30
+        let msg={};
+        axios({
+            url:location.href,
+            method:"post"
+        }).then(res=>{
+            msg=res.data
+            A();
+        })
+        function A(){
+            var chart_c723826aa2d24ac6a37a0e3da5a57741 = echarts.init(
+                document.getElementById('c723826aa2d24ac6a37a0e3da5a57741'), 'white', {renderer: 'canvas'});
+            var option_c723826aa2d24ac6a37a0e3da5a57741 = {
+                "animation": true,
+                "animationThreshold": 2000,
+                "animationDuration": 1000,
+                "animationEasing": "cubicOut",
+                "animationDelay": 0,
+                "animationDurationUpdate": 300,
+                "animationEasingUpdate": "cubicOut",
+                "animationDelayUpdate": 0,
+                "color": [
+                    "#c23531",
+                    "#2f4554",
+                    "#61a0a8",
+                    "#d48265",
+                    "#749f83",
+                    "#ca8622",
+                    "#bda29a",
+                    "#6e7074",
+                    "#546570",
+                    "#c4ccd3",
+                    "#f05b72",
+                    "#ef5b9c",
+                    "#f47920",
+                    "#905a3d",
+                    "#fab27b",
+                    "#2a5caa",
+                    "#444693",
+                    "#726930",
+                    "#b2d235",
+                    "#6d8346",
+                    "#ac6767",
+                    "#1d953f",
+                    "#6950a1",
+                    "#918597"
+                ],
+                "series": [
+                    {
+                        "type": "map",
+                        "name": "\u5404\u7701\u4eba\u53e3\u6570\u91cf",
+                        "label": {
+                            "show": true,
+                            "position": "top",
+                            "margin": 8
+                        },
+                        "mapType": "china",
+                        "data": [
+                            {
+                                //浙江
+                                "name": "\u6d59\u6c5f",
+                                "value": msg.浙江
+                            },
+                            {
+                                //甘肃
+                                "name": "\u7518\u8083",
+                                "value": msg.甘肃
+                            },
+                            {
+                                //四川
+                                "name": "\u56db\u5ddd",
+                                "value": msg.四川
+                            },
+                            {
+                                //云南
+                                "name": "\u4e91\u5357",
+                                "value": msg.云南
+                            },
+                            {
+                                //安徽
+                                "name": "\u5b89\u5fbd",
+                                "value": msg.安徽
+                            },
+                            {
+                                //山西
+                                "name": "\u5c71\u897f",
+                                "value": msg.山西
+                            },
+                            {
+                                //福建
+                                "name": "\u798f\u5efa",
+                                "value": msg.福建
+                            },
+                            {
+                                //陕西
+                                "name": "\u9655\u897f",
+                                "value": msg.陕西
+                            },
+                            {
+                                "name": "\u5e7f\u897f",
+                                "value": msg.广西
+                            },
+                            {
+                                "name": "\u5185\u8499\u53e4",
+                                "value": msg.内蒙古
+                            },
+                            {
+                                "name": "\u91cd\u5e86",
+                                "value": msg.重庆
+                            },
+                            {
+                                "name": "\u8d35\u5dde",
+                                "value": msg.贵州
+                            },
+                            {
+                                "name": "\u6fb3\u95e8",
+                                "value": msg.澳门
+                            },
+                            {
+                                "name": "\u5409\u6797",
+                                "value": msg.吉林
+                            },
+                            {
+                                "name": "\u6c5f\u82cf",
+                                "value": msg.江苏
+                            },
+                            {
+                                "name": "\u5c71\u4e1c",
+                                "value": msg.山东
+                            },
+                            {
+                                "name": "\u65b0\u7586",
+                                "value": msg.新疆
+                            },
+                            {
+                                "name": "\u5b81\u590f",
+                                "value": msg.宁夏
+                            },
+                            {
+                                "name": "\u897f\u85cf",
+                                "value": msg.西藏
+                            },
+                            {
+                                "name": "\u8fbd\u5b81",
+                                "value": msg.辽宁
+                            },
+                            {
+                                "name": "\u5317\u4eac",
+                                "value": msg.北京
+                            },
+                            {
+                                "name": "\u6d77\u5357",
+                                "value": msg.海南
+                            },
+                            {
+                                "name": "\u6c5f\u897f",
+                                "value": msg.江西
+                            },
+                            {
+                                "name": "\u9999\u6e2f",
+                                "value": msg.香港
+                            },
+                            {
+                                "name": "\u53f0\u6e7e",
+                                "value": msg.台湾
+                            },
+                            {
+                                "name": "\u4e0a\u6d77",
+                                "value": msg.上海
+                            },
+                            {
+                                "name": "\u9ed1\u9f99\u6c5f",
+                                "value": msg.黑龙江
+                            },
+                            {
+                                "name": "\u6cb3\u5357",
+                                "value": msg.河南
+                            },
+                            {
+                                "name": "\u6cb3\u5317",
+                                "value": msg.河北
+                            },
+                            {
+                                "name": "\u9752\u6d77",
+                                "value": msg.青海
+                            },
+                            {
+                                "name": "\u5929\u6d25",
+                                "value": msg.天津
+                            },
+                            {
+                                "name": "\u5e7f\u4e1c",
+                                "value": msg.广东
+                            },
+                            {
+                                "name": "\u6e56\u5317",
+                                "value": msg.湖北
+                            },
+                            {
+                                "name": "\u6e56\u5357",
+                                "value": msg.湖南
+                            }
+                        ],
+                        "roam": true,
+                        "aspectScale": 0.75,
+                        "nameProperty": "name",
+                        "selectedMode": false,
+                        "zoom": 1,
+                        "mapValueCalculation": "sum",
+                        "showLegendSymbol": true,
+                        "emphasis": {}
+                    }
+                ],
+                "legend": [
+                    {
+                        "data": [
+                            "\u5404\u7701\u4eba\u53e3\u6570\u91cf"
+                        ],
+                        "selected": {
+                            "\u5404\u7701\u4eba\u53e3\u6570\u91cf": true
+                        },
+                        "show": true,
+                        "padding": 5,
+                        "itemGap": 10,
+                        "itemWidth": 25,
+                        "itemHeight": 14
+                    }
+                ],
+                "tooltip": {
+                    "show": true,
+                    "trigger": "item",
+                    "triggerOn": "mousemove|click",
+                    "axisPointer": {
+                        "type": "line"
+                    },
+                    "showContent": true,
+                    "alwaysShowContent": false,
+                    "showDelay": 0,
+                    "hideDelay": 100,
+                    "textStyle": {
+                        "fontSize": 14
+                    },
+                    "borderWidth": 0,
+                    "padding": 5
                 },
-                {
-                    //甘肃
-                    "name": "\u7518\u8083",
-                    "value": 15
-                },
-                {
-                    //四川
-                    "name": "\u56db\u5ddd",
-                    "value": 22
-                },
-                {
-                    //云南
-                    "name": "\u4e91\u5357",
-                    "value": 21
-                },
-                {
-                    //安徽
-                    "name": "\u5b89\u5fbd",
-                    "value": 17
-                },
-                {
-                    //山西
-                    "name": "\u5c71\u897f",
-                    "value": 21
-                },
-                {
-                    //福建
-                    "name": "\u798f\u5efa",
-                    "value": 23
-                },
-                {
-                    //陕西
-                    "name": "\u9655\u897f",
-                    "value": 17
-                },
-                {
-                    "name": "\u5e7f\u897f",
-                    "value": 17
-                },
-                {
-                    "name": "\u5185\u8499\u53e4",
-                    "value": 18
-                },
-                {
-                    "name": "\u91cd\u5e86",
-                    "value": 12
-                },
-                {
-                    "name": "\u8d35\u5dde",
-                    "value": 15
-                },
-                {
-                    "name": "\u6fb3\u95e8",
-                    "value": 16
-                },
-                {
-                    "name": "\u5409\u6797",
-                    "value": 24
-                },
-                {
-                    "name": "\u6c5f\u82cf",
-                    "value": 12
-                },
-                {
-                    "name": "\u5c71\u4e1c",
-                    "value": 17
-                },
-                {
-                    "name": "\u65b0\u7586",
-                    "value": 20
-                },
-                {
-                    "name": "\u5b81\u590f",
-                    "value": 17
-                },
-                {
-                    "name": "\u897f\u85cf",
-                    "value": 11
-                },
-                {
-                    "name": "\u8fbd\u5b81",
-                    "value": 22
-                },
-                {
-                    "name": "\u5317\u4eac",
-                    "value": 13
-                },
-                {
-                    "name": "\u6d77\u5357",
-                    "value": 18
-                },
-                {
-                    "name": "\u6c5f\u897f",
-                    "value": 13
-                },
-                {
-                    "name": "\u9999\u6e2f",
-                    "value": 16
-                },
-                {
-                    "name": "\u53f0\u6e7e",
-                    "value": 20
-                },
-                {
-                    "name": "\u4e0a\u6d77",
-                    "value": 21
-                },
-                {
-                    "name": "\u9ed1\u9f99\u6c5f",
-                    "value": 17
-                },
-                {
-                    "name": "\u6cb3\u5357",
-                    "value": 18
-                },
-                {
-                    "name": "\u6cb3\u5317",
-                    "value": 13
-                },
-                {
-                    "name": "\u9752\u6d77",
-                    "value": 21
-                },
-                {
-                    "name": "\u5929\u6d25",
-                    "value": 17
-                },
-                {
-                    "name": "\u5e7f\u4e1c",
-                    "value": 25
-                },
-                {
-                    "name": "\u6e56\u5317",
-                    "value": 18
-                },
-                {
-                    "name": "\u6e56\u5357",
-                    "value": 22
+                "title": [
+                    {
+                        "text": "\u5168\u56fd\u5404\u7701\u4eba\u53e3\u6570\u91cf\u6392\u540d",
+                        "padding": 5,
+                        "itemGap": 10
+                    }
+                ],
+                "visualMap": {
+                    "show": true,
+                    "type": "continuous",
+                    "min": 0,
+                    "max": msg.max,
+                    "inRange": {
+                        "color": [
+                            "#FFFFFF",
+                            "#C20003"
+                        ]
+                    },
+                    "calculable": true,
+                    "inverse": false,
+                    "splitNumber": 5,
+                    "orient": "vertical",
+                    "showLabel": true,
+                    "itemWidth": 20,
+                    "itemHeight": 140,
+                    "borderWidth": 0
                 }
-            ],
-            "roam": true,
-            "aspectScale": 0.75,
-            "nameProperty": "name",
-            "selectedMode": false,
-            "zoom": 1,
-            "mapValueCalculation": "sum",
-            "showLegendSymbol": true,
-            "emphasis": {}
+            };
+            chart_c723826aa2d24ac6a37a0e3da5a57741.setOption(option_c723826aa2d24ac6a37a0e3da5a57741);
         }
-    ],
-    "legend": [
-        {
-            "data": [
-                "\u5404\u7701\u4eba\u53e3\u6570\u91cf"
-            ],
-            "selected": {
-                "\u5404\u7701\u4eba\u53e3\u6570\u91cf": true
-            },
-            "show": true,
-            "padding": 5,
-            "itemGap": 10,
-            "itemWidth": 25,
-            "itemHeight": 14
-        }
-    ],
-    "tooltip": {
-        "show": true,
-        "trigger": "item",
-        "triggerOn": "mousemove|click",
-        "axisPointer": {
-            "type": "line"
-        },
-        "showContent": true,
-        "alwaysShowContent": false,
-        "showDelay": 0,
-        "hideDelay": 100,
-        "textStyle": {
-            "fontSize": 14
-        },
-        "borderWidth": 0,
-        "padding": 5
-    },
-    "title": [
-        {
-            "text": "\u5168\u56fd\u5404\u7701\u4eba\u53e3\u6570\u91cf\u6392\u540d",
-            "padding": 5,
-            "itemGap": 10
-        }
-    ],
-    "visualMap": {
-        "show": true,
-        "type": "continuous",
-        "min": 0,
-        "max": 30,
-        "inRange": {
-            "color": [
-                "#FFFFFF",
-                "#C20003"
-            ]
-        },
-        "calculable": true,
-        "inverse": false,
-        "splitNumber": 5,
-        "orient": "vertical",
-        "showLabel": true,
-        "itemWidth": 20,
-        "itemHeight": 140,
-        "borderWidth": 0
-    }
-};
-        chart_c723826aa2d24ac6a37a0e3da5a57741.setOption(option_c723826aa2d24ac6a37a0e3da5a57741);
     </script>
 </body>
 </html>

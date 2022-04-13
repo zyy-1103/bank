@@ -63,7 +63,7 @@
                         <br><br><br><br>
                         <!--                        <a href="./flash-product.html  " style="font-size: x-large">准备抢购</a>-->
 
-                        <input v-if="!this.time" v-on:click="go()" id="flashBuy" data-toggle="modal" data-target="#exampleModal" value="立即秒杀" class="btn btn-danger"style="width: 20%;">
+                        <input v-if="!this.time" id="flashBuy" data-toggle="modal" data-target="#exampleModal" value="立即秒杀" class="btn btn-danger"style="width: 20%;">
                         <input v-if="this.time" value="立即秒杀" disabled class="btn btn-secondary" style="width: 20%;">
                     </div>
 
@@ -82,29 +82,29 @@
         </div>
 
     </div>
-
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">COMFORMATION</h5><br>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div style="color: #0062cc;font-size: large">确认秒杀此商品?</div>
-            </div>
-            <div class="modal-footer">
-                <button id="flash-Cancel" type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                <button id="flash-Confirm" type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">COMFORMATION</h5><br>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div style="color: #0062cc;font-size: large">确认秒杀此商品?</div>
+                </div>
+                <div class="modal-footer">
+                    <button id="flash-Cancel" type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button id="flash-Confirm" type="button" v-on:click="go()" class="btn btn-primary" data-dismiss="modal">确认</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 <!-- FOOTER -->
 <footer class="container">

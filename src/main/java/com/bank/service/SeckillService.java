@@ -2,6 +2,7 @@ package com.bank.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bank.bean.ComInfo;
+import com.bank.mapper.BackMapper;
 import com.bank.mapper.ComInfoMapper;
 import com.bank.utils.RedisToBeanUtil;
 import com.bank.utils.SM3;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.*;
 
 @Service
 public class SeckillService {
@@ -19,6 +20,8 @@ public class SeckillService {
     RedisAsyncCommands<String, String> commands;
     @Autowired
     ComInfoMapper mapper;
+    @Autowired
+    BackService service;
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     public String getComInfo(String s) throws ExecutionException, InterruptedException {
@@ -56,12 +59,12 @@ public class SeckillService {
         if (commands.get("u" + id).get().equals("1")) {
             return 1;
         }
-        System.out.println("没有存");
         String sql = commands.get("~odsql").get();
         String cnt = commands.get("~odcnt").get();
         String ope = commands.get("~odope").get();
         if (sql == null || cnt == null || ope == null) {
-            return 0;
+            commands.set("u" + id, "1");
+            return 1;
         }
         int realCnt = mapper.capable(sql, id);
         switch (ope) {
@@ -90,7 +93,7 @@ public class SeckillService {
             return null;
         }
         if ("1".equals(commands.get("u" + id).get())) {
-            return commands.get("url").get();
+            return commands.get("_url").get();
         }
         return null;
     }
@@ -98,9 +101,15 @@ public class SeckillService {
     public String go(String s, String url) throws ExecutionException, InterruptedException {
         JSONObject object = JSONObject.parseObject(s);
         String id = object.getString("id");
-        if (url.equals(commands.get("url").get()) && Integer.parseInt(commands.get("~remain").get())>0) {
-            Long aLong = commands.decr("~remain").get();
-
+        if (url.equals(commands.get("_url").get())) {
+            Long aLong = commands.decr("_remain").get();
+            if (aLong < 0) {
+                return "已售罄";
+            }else {
+                commands.incr("_sum");
+                service.update();
+                return "秒杀成功";
+            }
         }
         return "已售罄";
     }

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>职业分布</title>
+            <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+
+</head>
+<body>
+    <div id="a9466730af804d07acb0c14c6cf2de54" class="chart-container" style="width:900px; height:500px;"></div>
+    <script src="../../js/axios.min.js"></script>
+    <script>
+        let msg=[];
+        axios({
+            url:location.href,
+            method:"post"
+        }).then(res=>{
+            msg=res.data.data;
+            A();
+        })
+        function A(){
+
+            var chart_a9466730af804d07acb0c14c6cf2de54 = echarts.init(
+                document.getElementById('a9466730af804d07acb0c14c6cf2de54'), 'white', {renderer: 'canvas'});
+            var option_a9466730af804d07acb0c14c6cf2de54 = {
+                "animation": true,
+                "animationThreshold": 2000,
+                "animationDuration": 1000,
+                "animationEasing": "cubicOut",
+                "animationDelay": 0,
+                "animationDurationUpdate": 300,
+                "animationEasingUpdate": "cubicOut",
+                "animationDelayUpdate": 0,
+                "color": [
+                    "#c23531",
+                    "#2f4554",
+                    "#61a0a8",
+                    "#d48265",
+                    "#749f83",
+                    "#ca8622",
+                    "#bda29a",
+                    "#6e7074",
+                    "#546570",
+                    "#c4ccd3",
+                    "#f05b72",
+                    "#ef5b9c",
+                    "#f47920",
+                    "#905a3d",
+                    "#fab27b",
+                    "#2a5caa",
+                    "#444693",
+                    "#726930",
+                    "#b2d235",
+                    "#6d8346",
+                    "#ac6767",
+                    "#1d953f",
+                    "#6950a1",
+                    "#918597"
+                ],
+                "series": [
+                    {
+                        "type": "pie",
+                        "name": "\u5de5\u4f5c\u72b6\u6001",
+                        "clockwise": true,
+                        "data": [
+                            {
+                                "name": "\u5728\u804c",
+                                "value": msg[0]
+                            },
+                            {
+                                "name": "\u5931\u4e1a",
+                                "value": msg[1]
+                            },
+                            {
+                                "name": "\u56fd\u5bb6\u673a\u5173\u8d1f\u8d23\u4eba",
+                                "value": msg[2]
+                            },
+                            {
+                                "name": "\u515a\u7fa4\u7ec4\u7ec7\u8d1f\u8d23\u4eba",
+                                "value": msg[3]
+                            },
+                            {
+                                "name": "\u4e8b\u4e1a\u5355\u4f4d\u8d1f\u8d23\u4eba",
+                                "value": msg[4]
+                            },
+                            {
+                                "name": "\u4e13\u4e1a\u6280\u672f\u4eba\u5458",
+                                "value": msg[5]
+                            },
+                            {
+                                "name": "\u529e\u4e8b\u4eba\u5458",
+                                "value": msg[6]
+                            },
+                            {
+                                "name": "\u5546\u4e1a\u4eba\u5458",
+                                "value": msg[7]
+                            },
+                            {
+                                "name": "\u670d\u52a1\u4eba\u5458",
+                                "value": msg[8]
+                            },
+                            {
+                                "name": "\u519c\u6797\u7267\u6e14\u6c34\u5229\u4eba\u5458",
+                                "value": msg[9]
+                            },
+                            {
+                                "name": "\u751f\u4ea7\u8fd0\u8f93\u8bbe\u5907\u64cd\u4f5c\u4eba\u5458",
+                                "value": msg[10]
+                            },
+                            {
+                                "name": "\u519b\u4eba",
+                                "value": msg[11]
+                            },
+                            {
+                                "name": "\u5176\u4ed6",
+                                "value": msg[12]
+                            }
+                        ],
+                        "radius": [
+                            "0%",
+                            "75%"
+                        ],
+                        "center": [
+                            "50%",
+                            "50%"
+                        ],
+                        "roseType": "radius",
+                        "label": {
+                            "show": true,
+                            "position": "top",
+                            "margin": 8
+                        }
+                    }
+                ],
+                "legend": [
+                    {
+                        "data": [
+                            "\u5728\u804c",
+                            "\u5931\u4e1a",
+                            "\u56fd\u5bb6\u673a\u5173\u8d1f\u8d23\u4eba",
+                            "\u515a\u7fa4\u7ec4\u7ec7\u8d1f\u8d23\u4eba",
+                            "\u4e8b\u4e1a\u5355\u4f4d\u8d1f\u8d23\u4eba",
+                            "\u4e13\u4e1a\u6280\u672f\u4eba\u5458",
+                            "\u529e\u4e8b\u4eba\u5458",
+                            "\u5546\u4e1a\u4eba\u5458",
+                            "\u670d\u52a1\u4eba\u5458",
+                            "\u519c\u6797\u7267\u6e14\u6c34\u5229\u4eba\u5458",
+                            "\u751f\u4ea7\u8fd0\u8f93\u8bbe\u5907\u64cd\u4f5c\u4eba\u5458",
+                            "\u519b\u4eba",
+                            "\u5176\u4ed6"
+                        ],
+                        "selected": {},
+                        "show": true,
+                        "bottom": "left",
+                        "padding": 5,
+                        "itemGap": 10,
+                        "itemWidth": 25,
+                        "itemHeight": 14
+                    }
+                ],
+                "tooltip": {
+                    "show": true,
+                    "trigger": "item",
+                    "triggerOn": "mousemove|click",
+                    "axisPointer": {
+                        "type": "line"
+                    },
+                    "showContent": true,
+                    "alwaysShowContent": false,
+                    "showDelay": 0,
+                    "hideDelay": 100,
+                    "textStyle": {
+                        "fontSize": 14
+                    },
+                    "borderWidth": 0,
+                    "padding": 5
+                },
+                "title": [
+                    {
+                        "text": "\u5de5\u4f5c\u72b6\u6001",
+                        "padding": 5,
+                        "itemGap": 10
+                    }
+                ]
+            };
+            chart_a9466730af804d07acb0c14c6cf2de54.setOption(option_a9466730af804d07acb0c14c6cf2de54);
+        }
+    </script>
+</body>
+</html>

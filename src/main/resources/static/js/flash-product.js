@@ -14,7 +14,7 @@ Vue.createApp({
     methods:{
         go(){
             axios({
-                url:"seckill/"+url,
+                url:"seckill/"+this.url,
                 method:"post",
                 data:{
                     id:id,

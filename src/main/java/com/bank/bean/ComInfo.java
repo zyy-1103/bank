@@ -15,4 +15,5 @@ public class ComInfo {
     private String startTime;
     private String endTime;
     private String isOver;
+    private String remain;
 }

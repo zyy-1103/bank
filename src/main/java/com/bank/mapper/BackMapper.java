@@ -5,6 +5,7 @@ import com.bank.bean.ComInfo;
 import com.bank.bean.SecResultBean;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,6 +25,15 @@ public interface BackMapper {
     @Select("select * from result_all")
     List<SecResultBean> selectAll();
 
-    @Select("select count(address) as count,address from user where id in (select user_id from result_person where seckill_id=#{seckillId}) group by address")
-    List<AddressChart> selectProvinces(String seckillId);
+    @Update("update com_info set remain=#{remain} where id=#{id}")
+    void update(String remain,String id);
+
+    @Select("select count(*) from result_person where user_id in(select id from user where age>=#{l} and age<=#{r}) and seckill_id=#{id}")
+    Integer selectAge(int l, int r,String id);
+
+    @Select("select count(*) from result_person where user_id in(select id from user where work_state=#{s}) and seckill_id=#{id}")
+    Integer selectWork(String s, String id);
+
+    @Select("select count(*) from result_person where user_id in(select id from user where address=#{s}) and seckill_id=#{id}")
+    Integer selectAddr(String s, String id);
 }
