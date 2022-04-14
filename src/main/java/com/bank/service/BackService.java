@@ -35,6 +35,11 @@ public class BackService {
             new ThreadPoolExecutor.DiscardOldestPolicy());
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
+    public String getRAll(){
+        JSONObject object = new JSONObject();
+        object.put("data", mapper.selectRAll());
+        return object.toJSONString();
+    }
 
     public void update(){
         executorService.submit(()->{
@@ -51,6 +56,7 @@ public class BackService {
     }
 
     public String getProvinces(String id) {
+        System.out.println(id);
         JSONObject object = new JSONObject();
         Province[] values = Province.values();
         int max=0;
@@ -109,6 +115,7 @@ public class BackService {
         }
         commands.set("_sum", "0");
         commands.set("_start", notOver.getStartTime());
+        commands.set("_id", notOver.getId());
         commands.set("_end", notOver.getEndTime());
         commands.set("_quantity", notOver.getQuantity());
         commands.set("_total", notOver.getTotal());

@@ -20,6 +20,6 @@ public interface UserMapper extends BaseMapper<UserBean> {
     @Update("update user set password=#{s}")
     Integer update(String s);
 
-    @Insert("insert into result_person values(#{uid},#{sid})")
+    @Insert("insert into order_form values(#{uid},#{sid})")
     void insertRP(int uid, int sid);
 }

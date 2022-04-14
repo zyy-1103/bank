@@ -28,12 +28,15 @@ public interface BackMapper {
     @Update("update com_info set remain=#{remain} where id=#{id}")
     void update(String remain,String id);
 
-    @Select("select count(*) from result_person where user_id in(select id from user where age>=#{l} and age<=#{r}) and seckill_id=#{id}")
+    @Select("select count(*) from order_form where user_id in(select id from user where age>=#{l} and age<=#{r}) and seckill_id=#{id}")
     Integer selectAge(int l, int r,String id);
 
-    @Select("select count(*) from result_person where user_id in(select id from user where work_state=#{s}) and seckill_id=#{id}")
+    @Select("select count(*) from order_form where user_id in(select id from user where work_state=#{s}) and seckill_id=#{id}")
     Integer selectWork(String s, String id);
 
-    @Select("select count(*) from result_person where user_id in(select id from user where address=#{s}) and seckill_id=#{id}")
+    @Select("select count(*) from order_form where user_id in(select id from user where address=#{s}) and seckill_id=#{id}")
     Integer selectAddr(String s, String id);
+
+    @Select("select * from result_all limit 30")
+    List<SecResultBean> selectRAll();
 }

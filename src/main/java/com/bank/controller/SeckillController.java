@@ -34,4 +34,6 @@ public class SeckillController {
     public String go(@RequestBody String s,@PathVariable String url) throws ExecutionException, InterruptedException {
         return service.go(s, url);
     }
+
+
 }

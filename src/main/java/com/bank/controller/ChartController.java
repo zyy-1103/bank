@@ -22,6 +22,14 @@ public class ChartController {
         return service.getProvinces(id);
     }
 
+
+    @PostMapping(value = "getRAll")
+    @ResponseBody
+//    @RequestMapping(value = "getRAll")
+    public String getRAll() {
+        return service.getRAll();
+    }
+
     @GetMapping(value = "getAge/{id}")
     public String toAges(){
         return "../age";

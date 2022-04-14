@@ -1,6 +1,5 @@
 package com.bank.service;
 
-import com.bank.bean.SecResultPersonBean;
 import com.bank.bean.UserBean;
 import com.bank.mapper.UserMapper;
 import com.bank.utils.Province;

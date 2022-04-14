@@ -2,7 +2,7 @@ package com.bank.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bank.bean.ComInfo;
-import com.bank.mapper.BackMapper;
+import com.bank.bean.OrderFormBean;
 import com.bank.mapper.ComInfoMapper;
 import com.bank.utils.RedisToBeanUtil;
 import com.bank.utils.SM3;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.*;
 
 @Service
@@ -22,6 +23,8 @@ public class SeckillService {
     ComInfoMapper mapper;
     @Autowired
     BackService service;
+    @Autowired
+    SpringProducer producer;
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     public String getComInfo(String s) throws ExecutionException, InterruptedException {
@@ -101,16 +104,29 @@ public class SeckillService {
     public String go(String s, String url) throws ExecutionException, InterruptedException {
         JSONObject object = JSONObject.parseObject(s);
         String id = object.getString("id");
+        String word = object.getString("word");
+        if(word==null||!word.equals(SM3.encryptWithSalt(id))||commands.get(id).get()==null)
+            return "登录信息无效";
+
         if (url.equals(commands.get("_url").get())) {
             Long aLong = commands.decr("_remain").get();
             if (aLong < 0) {
                 return "已售罄";
             }else {
+//                秒杀成功
+
+//                生成订单
+                OrderFormBean bean = new OrderFormBean(0, Integer.parseInt(id),
+                        Integer.parseInt(commands.get("_id").get()), 0, dateFormat.format(new Date()));
+                producer.generateOrder(bean);
+//                延迟消息，删除8分钟未支付的订单
+                producer.listener(bean);
                 commands.incr("_sum");
                 service.update();
                 return "秒杀成功";
             }
         }
-        return "已售罄";
+        return "秒杀尚未开始或已经结束";
     }
+
 }

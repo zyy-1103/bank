@@ -24,26 +24,20 @@
             }
         }
     </style>
-
-    <!-- Custom styles for this template -->
     <link rel="stylesheet" href="./css/carousel.css">
     <link rel="shortcut icon" href="./images/logo.png">
     <script src="js/vue.min.js"></script>
     <script src="js/axios.min.js"></script>
 </head>
 <body>
-
 <a href="./flash-sale.html">
     <img src="./images/backTag.png" alt="加载失败" style="width: 3%;height: 3%;margin-left: 2%">
 </a>
-
 <span style="text-align: center;margin-left: 35%">
     <span style="text-align: center;font-size: x-large">——— 商品秒杀 ———</span>
 </span><br><br>
-
 <div class="album py-5 bg-light" id="all">
     <div class="container">
-
         <div class="row mb-2">
             <div class="col-md-12">
                 <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -61,17 +55,13 @@
                         <br>
                         <span style="font-size: large">存款共一万份（1万元/份），总金额1亿元，单用户只能购买一份</span>
                         <br><br><br><br>
-                        <!--                        <a href="./flash-product.html  " style="font-size: x-large">准备抢购</a>-->
-
                         <input v-if="!this.time" id="flashBuy" data-toggle="modal" data-target="#exampleModal" value="立即秒杀" class="btn btn-danger"style="width: 20%;">
                         <input v-if="this.time" value="立即秒杀" disabled class="btn btn-secondary" style="width: 20%;">
                     </div>
-
                     <div class="col-md-4">
                         <img src="./images/SanXiang.jpg" alt="..." width="100%" height="100%">
                     </div>
                 </div><br>
-
                 <h5>秒杀规则：</h5><br>
                 个人客户年龄小于18岁;
                 逾期记录-近3年逾期2次以上（金额小于1000元，3天内还清的除外）;
@@ -80,9 +70,7 @@
                 有以上记录的客户将无法参与秒杀活动，且符合条件的客户只能购买一份。<br>
             </div>
         </div>
-
     </div>
-    <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -103,26 +91,13 @@
         </div>
     </div>
 </div>
-
-
-
-<!-- FOOTER -->
 <footer class="container">
     <br>
     <p class="float-right"><a href="#">Back to top</a></p>
     <p>We are all Dream-Builders.&middot; <a href="#">Nothing</a> &middot; <a href="#">Teams</a></p>
 </footer>
-
-
 <script src="js/jquery.min.js"></script>
 <script src="./bootstrap-4.6.1/js/bootstrap.bundle.min.js"></script>
-
-<!--<script>-->
-
-<!--    $('#flashBuy').attr('disabled', false);-->
-<!--    document.getElementById("flashBuy").setAttribute('class','btn btn-danger');-->
-
-<!--</script>-->
 <script src="js/jquery.cookie.js"></script>
 <script src="js/flash-product.js"></script>
 </body>
