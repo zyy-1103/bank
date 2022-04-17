@@ -22,6 +22,9 @@ Vue.createApp({
                 }
             }).then(res=>{
                 alert(res.data);
+                if (res.data == "秒杀成功") {
+                    location.href = "flash-sale.html";
+                }
             })
         }
     },

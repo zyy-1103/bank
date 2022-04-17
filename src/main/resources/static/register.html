@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <link href="./bootstrap-4.6.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="./js/jquery.min.js"></script>
+    <script src="./js/vue.min.js"></script>
     <script src="./js/login.js"></script>
 
     <style>
@@ -30,7 +31,7 @@
 </head>
 <body class="text-center">
 
-<div class="container">
+<div class="container" id="all">
 
     <form class="form-signin" action="#" method="post">
 
@@ -42,25 +43,79 @@
             <span id="errorMsg" style="color: red"></span>
         </div>
         <label for="inputUsername" class="sr-only">Username</label>
-        <input type="text" id="inputUsername" class="form-control" placeholder="用户名" autofocus>
+        <input type="text" id="inputUsername" v-model="user" class="form-control" placeholder="姓名" autofocus>
 
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="密码">
+        <input type="password" id="inputPassword" v-model="pass" class="form-control" placeholder="密码">
         <label for="inputPassword2" class="sr-only">Password2</label>
-        <input type="password" id="inputPassword2" class="form-control" placeholder="确认密码">
+        <input type="password" id="inputPassword2" v-model="pass2" class="form-control" placeholder="确认密码">
         <label for="in" class="sr-only">icd</label>
-        <input type="text" id="in" class="form-control" placeholder="身份证号码">
+        <input type="text" id="in" class="form-control" v-model="id" placeholder="身份证号码">
+        <select class="form-control" v-model="workState">
+            在职,失业,国家机关负责人,党群组织负责人,事业单位负责人,专业技术人员,办事人员,商业人员,服务人员,农林牧渔水利人员,生产运输设备操作人员,军人,其他
+            <option value="在职">在职</option>
+            <option value="失业">失业</option>
+            <option value="国家机关负责人">国家机关负责人</option>
+            <option value="党群组织负责人">党群组织负责人</option>
+            <option value="事业单位负责人">事业单位负责人</option>
+            <option value="专业技术人员">专业技术人员</option>
+            <option value="办事人员">办事人员</option>
+            <option value="商业人员">商业人员</option>
+            <option value="服务人员">服务人员</option>
+            <option value="农林牧渔水利人员">农林牧渔水利人员</option>
+            <option value="生产运输设备操作人员">生产运输设备操作人员</option>
+            <option value="军人">军人</option>
+            <option value="其他">其他</option>
+        </select>
+        <select class="form-control" v-model="addr">
+            <option value="北京">北京</option>
+            <option value="上海">上海</option>
+            <option value="天津">天津</option>
+            <option value="重庆">重庆</option>
+            <option value="湖南">湖南</option>
+            <option value="湖北">湖北</option>
+            <option value="四川">四川</option>
+            <option value="河南">河南</option>
+            <option value="河北">河北</option>
+            <option value="福建">福建</option>
+            <option value="陕西">陕西</option>
+            <option value="山西">山西</option>
+            <option value="宁夏">宁夏</option>
+            <option value="内蒙古">内蒙古</option>
+            <option value="西藏">西藏</option>
+            <option value="新疆">新疆</option>
+            <option value="山东">山东</option>
+            <option value="江西">江西</option>
+            <option value="云南">云南</option>
+            <option value="广东">广东</option>
+            <option value="广西">广西</option>
+            <option value="吉林">吉林</option>
+            <option value="黑龙江">黑龙江</option>
+            <option value="辽宁">辽宁</option>
+            <option value="青海">青海</option>
+            <option value="浙江">浙江</option>
+            <option value="江苏">江苏</option>
+            <option value="安徽">安徽</option>
+            <option value="贵州">贵州</option>
+            <option value="台湾">台湾</option>
+            <option value="甘肃">甘肃</option>
+            <option value="贵州">贵州</option>
+            <option value="海南">海南</option>
+            <option value="香港">香港</option>
+            <option value="澳门">澳门</option>
+        </select>
         <label for="inputEmail" class="sr-only">Email</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="邮箱">
+        <input type="email" id="inputEmail" class="form-control" v-model="email" placeholder="邮箱">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1" onclick="getCode()">获取验证码</span>
+                <span class="input-group-text" id="basic-addon1" v-on:click="getCode()">获取验证码</span>
             </div>
-            <input type="text" id="emailCode" class="form-control" placeholder="验证码" aria-label="Username" aria-describedby="basic-addon1">
+            <input type="text" id="emailCode" class="form-control" v-model="code" placeholder="验证码" aria-label="Username" aria-describedby="basic-addon1">
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="button" onclick="register()">注册</button>
+        <button class="btn btn-lg btn-primary btn-block" type="button" v-on:click="register()">注册</button>
     </form>
 </div>
-
+<script src="js/axios.min.js"></script>
+<script src="js/register.js"></script>
 </body>
 </html>

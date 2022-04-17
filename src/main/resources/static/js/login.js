@@ -1,7 +1,7 @@
 Vue.createApp({
     data() {
         return {
-            user: '',
+            email: '',
             password: '',
             errorMsg:''
         }
@@ -12,7 +12,7 @@ Vue.createApp({
                 url:"/login",
                 method:"post",
                 data:{
-                    user:this.user,
+                    email:this.email,
                     password:this.password
                 }
             }).then(res=>{

@@ -35,6 +35,12 @@ public class BackService {
             new ThreadPoolExecutor.DiscardOldestPolicy());
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
+    public String getOrder(){
+        JSONObject object = new JSONObject();
+        object.put("data", mapper.selectOrder());
+        return object.toJSONString();
+    }
+
     public String getRAll(){
         JSONObject object = new JSONObject();
         object.put("data", mapper.selectRAll());
@@ -44,11 +50,9 @@ public class BackService {
     public void update(){
         executorService.submit(()->{
             try {
-                System.out.println("开始执行");
                 int n = Integer.parseInt(commands.get("_remain").get());
                 String s = n >= 0 ? String.valueOf(n) : "0";
                 mapper.update(s, notOver.getId());
-                System.out.println("执行完成");
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
@@ -115,12 +119,14 @@ public class BackService {
         }
         commands.set("_sum", "0");
         commands.set("_start", notOver.getStartTime());
+        commands.set("_rate", notOver.getRate());
         commands.set("_id", notOver.getId());
         commands.set("_end", notOver.getEndTime());
         commands.set("_quantity", notOver.getQuantity());
         commands.set("_total", notOver.getTotal());
         commands.set("_price", notOver.getPrice());
         commands.set("_remain", notOver.getQuantity());
+        commands.set("_word", notOver.getWord());
         time = format.parse(notOver.getStartTime()).getTime();
 //        ScheduledExecutorService service = Executors.newScheduledThreadPool(1);
 //        service.scheduleAtFixedRate(() -> {
@@ -170,6 +176,9 @@ public class BackService {
             commands.del("_end");
             commands.del("_price");
             commands.del("_url");
+            commands.del("_rate");
+            commands.del("_id");
+            commands.del("_word");
             commands.del("~odsql");
             commands.del("~odcnt");
             commands.del("~odope");
@@ -192,6 +201,9 @@ public class BackService {
     }
 
     public String login(UserBean bean) {
+        if (bean.getUser() == null || bean.getPassword() == null) {
+            return "数据不能为空";
+        }
         bean.setPassword(SM3.encrypt(bean.getPassword()));
         return String.valueOf(mapper.isUser(bean.getUser(), bean.getPassword()));
     }

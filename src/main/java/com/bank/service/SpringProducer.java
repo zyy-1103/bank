@@ -28,11 +28,13 @@ public class SpringProducer {
 
     public void generateOrder(OrderFormBean bean) {
         String topic = "generate-order";
-        rocketMQTemplate.asyncSend(topic, bean, callback);
+//        rocketMQTemplate.asyncSend(topic, bean, callback);
+        rocketMQTemplate.syncSend(topic, bean);
     }
 
     public void listener(OrderFormBean bean) {
         String topic = "delay-listener";
-        rocketMQTemplate.asyncSend(topic, MessageBuilder.withPayload(bean).build(), callback, 3000, 12);
+//        rocketMQTemplate.asyncSend(topic, MessageBuilder.withPayload(bean).build(), callback, 5000, 12);
+        rocketMQTemplate.syncSend(topic, MessageBuilder.withPayload(bean).build(), 5000, 2);
     }
 }

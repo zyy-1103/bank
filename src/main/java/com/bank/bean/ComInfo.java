@@ -16,4 +16,6 @@ public class ComInfo {
     private String endTime;
     private String isOver;
     private String remain;
+    private String rate;
+    private String word;
 }

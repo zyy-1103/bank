@@ -1,0 +1,39 @@
+Vue.createApp({
+    data(){
+        return{
+            msg:[{}],
+            finished:[{}]
+        }
+    },
+    methods:{
+        pay(id){
+            axios({
+                url:"pay",
+                method:"post",
+                data:{
+                    id:id
+                }
+            }).then(res=>{
+                alert(res.data);
+                location.reload();
+            }).catch(e=>{
+                alert(e.response.data.message)
+            })
+        }
+    },
+    created(){
+        axios({
+            url:"getOrder",
+            method:'post'
+        }).then(res=>{
+            this.msg=res.data.data
+            this.finished=res.data.finished
+            for (let i = 0; i < this.msg.length; i++) {
+                this.msg[i].amount="立即支付￥"+this.msg[i].amount
+            }
+            for (let i = 0; i < this.finished.length; i++) {
+                this.finished[i].amount="下单成功￥"+this.finished[i].amount;
+            }
+        })
+    }
+}).mount("#msg")

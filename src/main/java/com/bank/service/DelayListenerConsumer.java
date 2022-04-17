@@ -22,8 +22,8 @@ public class DelayListenerConsumer implements RocketMQListener<OrderFormBean> {
     @Override
     public void onMessage(OrderFormBean bean) {
         System.out.println("删除订单");
-        if (mapper.isFinished(bean.getUserId(), bean.getSeckillId())!=0) {
-            mapper.delUnFinished(bean.getUserId(), bean.getSeckillId());
-        }
+//        if (mapper.isFinished(bean.getUserId(), bean.getSeckillId())!=0) {
+//            mapper.delUnFinished(bean.getUserId(), bean.getSeckillId());
+//        }
     }
 }

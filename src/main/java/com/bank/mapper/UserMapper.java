@@ -14,7 +14,7 @@ public interface UserMapper extends BaseMapper<UserBean> {
     /**
      * @return 用户的id
      */
-    @Select("select id from user where user=#{user} and password=#{password}")
+    @Select("select id from user where email=#{email} and password=#{password}")
     Integer isUser(UserBean bean);
 
     @Update("update user set password=#{s}")
@@ -22,4 +22,10 @@ public interface UserMapper extends BaseMapper<UserBean> {
 
     @Insert("insert into order_form values(#{uid},#{sid})")
     void insertRP(int uid, int sid);
+
+    @Select("select count(*) from user where email=#{email} or id_num=#{idNum}")
+    int isRegistered(String email, String idNum);
+
+    @Insert("insert into overdue_record values(#{id},#{userId},#{date},#{repay},#{amount})")
+    void insertOd(Integer id, String userId, String date, String repay, String amount);
 }

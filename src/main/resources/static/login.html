@@ -29,8 +29,8 @@
         <div style="text-align: left">
             <span id="errorMsg" style="color: red">{{errorMsg}}</span>
         </div>
-        <label for="inputUsername" class="sr-only">Username</label>
-        <input v-model="user"  type="text" id="inputUsername" class="form-control" placeholder="用户名" required autofocus>
+        <label for="inputUsername" class="sr-only">Email</label>
+        <input v-model="email"  type="text" id="inputUsername" class="form-control" placeholder="邮箱" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input v-model="password" v-on:keydown.enter="login()" type="password" id="inputPassword" class="form-control" placeholder="密码" required>
         <div class="checkbox mb-3">

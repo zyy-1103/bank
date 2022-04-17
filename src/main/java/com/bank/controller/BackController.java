@@ -22,6 +22,11 @@ public class BackController {
         return service.config(comInfo);
     }
 
+    @RequestMapping(value = "getOrder")
+    public String getOrder(){
+        return service.getOrder();
+    }
+
     /**
      *     如果出现意外情况导致服务器宕机，可以发送请求
      *     手动将最近一次商品信息读入redis中
@@ -42,7 +47,7 @@ public class BackController {
     }
 
     @PostMapping(value = "login")
-    public String login(UserBean bean) {
+    public String login(@RequestBody UserBean bean) {
         return service.login(bean);
     }
 

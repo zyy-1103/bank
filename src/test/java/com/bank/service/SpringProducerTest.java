@@ -23,7 +23,7 @@ class SpringProducerTest {
     void sendMsg() throws InterruptedException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String s = format.format(new Date());
-        OrderFormBean bean = new OrderFormBean(0, 1, 1, 0, s);
+        OrderFormBean bean = new OrderFormBean(0, 1, 1, 0, "1", s,"1");
         producer.generateOrder(bean);
         producer.listener(bean);
         Thread.sleep(100000);

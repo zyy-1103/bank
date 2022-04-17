@@ -1,7 +1,6 @@
 package com.bank.mapper;
 
-import com.bank.bean.AddressChart;
-import com.bank.bean.ComInfo;
+import com.bank.bean.OrderFormBean;
 import com.bank.bean.SecResultBean;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -39,4 +38,8 @@ public interface BackMapper {
 
     @Select("select * from result_all limit 30")
     List<SecResultBean> selectRAll();
+
+    @Select("select * from order_form")
+    List<OrderFormBean> selectOrder();
+
 }

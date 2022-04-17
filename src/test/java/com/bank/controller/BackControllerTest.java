@@ -21,6 +21,8 @@ import org.springframework.web.context.WebApplicationContext;
 import javax.annotation.Resource;
 import javax.xml.ws.RequestWrapper;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -39,7 +41,8 @@ class BackControllerTest {
     @Test
     void config() throws Exception {
         JSONObject object = new JSONObject();
-//        ComInfo comInfo = new ComInfo("1", "1", "1", "1", "1", "1");
+//        ComInfo comInfo = new ComInfo("1", "1", "1", "1", LocalDate.now().toString(),LocalDate.now().toString(),"0","0","0.0");
+
         object.put("quantity", "1");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/back/config")

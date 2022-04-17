@@ -17,6 +17,7 @@ public class UserBean {
     private String email;
     private String password;
     private String address;
+    private String idNum;
     private int sucTimes;
     private int failTimes;
 }

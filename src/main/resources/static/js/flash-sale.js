@@ -32,13 +32,18 @@ Vue.createApp({
                     if (!this.capable) {
                         this.loginText = "您不符合本次活动规则";
                     }else{
-                        this.loginText="进入秒杀"
+                        if (this.capable == 2) {
+                            this.loginText = "您已参与过本次秒杀";
+                            this.capable=0;
+                        }else{
+                            this.loginText="进入秒杀"
+                        }
                     }
                     this.start=res.startTime;
                     this.quantity=res.quantity;
                     this.price=res.price;
                     this.total=res.total;
-                    this.endTime=res.endTime;
+                    this.end=res.endTime;
                 }
             });
         }else {

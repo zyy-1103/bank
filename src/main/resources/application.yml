@@ -24,3 +24,8 @@ rocketmq:
   name-server: localhost:9876
   server:
     port: 1100
+
+redis:
+  port: 6379
+  addr: 121.43.41.221
+  pass: wangwangduifendui
